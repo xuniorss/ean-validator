@@ -1,7 +1,10 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { eanValidator } from '@/utils/ean-validate'
+import { Binary } from 'lucide-react'
+
 import { ChangeEvent, useCallback, useState } from 'react'
 
 type EansTypes = {
@@ -13,15 +16,16 @@ export default function Home() {
 	const [fileContent, setFileContent] = useState<string | null>(null)
 	const [validEANs, setValidEANs] = useState<EansTypes[]>([])
 	const [invalidEANs, setInvalidEANs] = useState<EansTypes[]>([])
-
-	// 1 - 8 codigo produto
-	// 9 - 21 cod ean
+	const [isLoading, setIsLoading] = useState(false)
+	const [file, setFile] = useState<File | null>(null)
 
 	const handleFileChange = useCallback(
 		(event: ChangeEvent<HTMLInputElement>) => {
 			const selectedFile = event.target.files?.[0]
 
 			if (!selectedFile) return
+
+			setFile(selectedFile)
 
 			const fileReader = new FileReader()
 			fileReader.onload = (e) => {
@@ -34,58 +38,87 @@ export default function Home() {
 		[],
 	)
 
-	const onValidate = useCallback((value: string) => {
-		return eanValidator(value)
-	}, [])
-
-	const validateEan = useCallback(() => {
+	const onValidate = useCallback(() => {
 		if (fileContent) {
 			const lines = fileContent.split('\n')
 			const validEANsArray: EansTypes[] = []
 			const invalidEANsArray: EansTypes[] = []
 
-			lines.forEach((line, idx) => {
+			lines.forEach((line) => {
 				const [codProduto, ean] = line.split('**')
-				if (onValidate(ean)) validEANsArray.push({ codProduto, ean })
+				if (eanValidator(ean)) validEANsArray.push({ codProduto, ean })
 				else invalidEANsArray.push({ codProduto, ean })
 			})
 
 			setValidEANs(validEANsArray)
 			setInvalidEANs(invalidEANsArray)
 		}
-	}, [fileContent, onValidate])
+	}, [fileContent])
 
 	return (
-		<div>
-			<Input type="file" accept=".txt" onChange={handleFileChange} />
-			<button type="button" onClick={validateEan}>
-				Validar
-			</button>
-			<div>
-				<h2>EANs Válidos:</h2>
-				<ul>
-					<p>Qtd: {validEANs.length}</p>
-					{validEANs.map((ean, index) => (
-						<li key={index}>
-							<strong>Código do Produto:</strong> {ean.codProduto},{' '}
-							<strong>EAN:</strong> {ean.ean}
-						</li>
-					))}
-				</ul>
-			</div>
+		<section className="flex h-full w-full flex-col">
+			<header className="fixed top-0 flex w-full items-center justify-center border-b bg-slate-50 px-5 py-3 lg:justify-between">
+				<span className="hidden items-center gap-x-2 lg:flex">
+					<Binary className="h-7 w-7" />
+					<h1 className="text-lg font-bold">Validador de Eans</h1>
+				</span>
 
-			<div>
-				<h2>EANs Inválidos:</h2>
-				<ul>
-					<p>Qtd: {invalidEANs.length}</p>
-					{invalidEANs.map((ean, index) => (
-						<li key={index}>
-							<strong>Código do Produto:</strong> {ean.codProduto},{' '}
-							<strong>EAN:</strong> {ean.ean}
-						</li>
-					))}
-				</ul>
-			</div>
-		</div>
+				<div className="flex items-center gap-x-2">
+					<Input
+						type="file"
+						accept=".txt"
+						onChange={handleFileChange}
+						className="col-span-1 lg:col-span-2"
+					/>
+					<Button
+						className="col-span-1 select-none"
+						onClick={onValidate}
+						disabled={!file}
+					>
+						Validar
+					</Button>
+				</div>
+
+				<h2 className="hidden text-sm font-semibold lg:inline-flex">
+					Desenvolvido por: Gilberto Fortunato - Conversão
+				</h2>
+			</header>
+
+			<article className="flex h-full w-full flex-col items-center pt-20">
+				<section className="grid h-full w-full max-w-screen-lg grid-cols-1 lg:grid-cols-2">
+					<div>
+						{validEANs.length > 0 && (
+							<div className="flex h-full flex-col">
+								<h3>EANs Válidos: {validEANs.length}</h3>
+								<ul>
+									{validEANs.map((ean, idx) => (
+										<li key={idx}>
+											<strong>COD_PRODUTO:</strong> {ean.codProduto}
+											<strong>COD_EAN:</strong> {ean.ean}
+										</li>
+									))}
+								</ul>
+							</div>
+						)}
+					</div>
+
+					<div>
+						{invalidEANs.length > 0 && (
+							<div className="flex h-full flex-col">
+								<h3>EANs Inválidos: {invalidEANs.length}</h3>
+								<ul>
+									{invalidEANs.map((ean, idx) => (
+										<li key={idx}>
+											<strong>COD_PRODUTO:</strong> {ean.codProduto}
+											<strong>COD_EAN:</strong> {ean.ean}
+										</li>
+									))}
+								</ul>
+							</div>
+						)}
+					</div>
+				</section>
+			</article>
+		</section>
 	)
 }
