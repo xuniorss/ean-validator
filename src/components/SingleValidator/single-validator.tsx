@@ -20,6 +20,7 @@ export const SValidator = () => {
 				value={input}
 				minLength={2}
 				maxLength={13}
+				placeholder="Ex: 7896003706543"
 				onChange={(e) => setInput(e.target.value)}
 			/>
 			{input.length > 1 && (
