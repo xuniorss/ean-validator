@@ -5,6 +5,8 @@ import { Binary, FileSearch, LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { HowItWorks } from '../HowItWorks'
+import { SingleValidator } from '../SingleValidator'
+import { Separator } from '../ui/separator'
 
 type RoutesProps = {
 	label: string
@@ -45,6 +47,10 @@ export const Sidebar = () => {
 							</Link>
 						</li>
 					))}
+					<li>
+						<SingleValidator />
+					</li>
+					<Separator />
 					<li>
 						<HowItWorks />
 					</li>
