@@ -15,5 +15,7 @@ export const generateDigEan = (cod: string, num: number): string => {
 	tot3 = tot1 + tot2
 
 	let dig = Math.ceil(tot3 / 10) * 10 - tot3
+	if (dig === 10) dig = 0
+
 	return dig.toString()
 }
