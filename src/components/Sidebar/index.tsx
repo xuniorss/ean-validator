@@ -1,9 +1,10 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { Binary, CheckSquare, LucideIcon } from 'lucide-react'
+import { Binary, FileSearch, LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { HowItWorks } from '../HowItWorks'
 
 type RoutesProps = {
 	label: string
@@ -12,7 +13,7 @@ type RoutesProps = {
 }
 
 const sidebarRoutes: RoutesProps[] = [
-	{ label: 'Validador', href: '/', icon: CheckSquare },
+	{ label: 'Validador', href: '/', icon: FileSearch },
 ]
 
 export const Sidebar = () => {
@@ -44,6 +45,9 @@ export const Sidebar = () => {
 							</Link>
 						</li>
 					))}
+					<li>
+						<HowItWorks />
+					</li>
 				</ul>
 			</section>
 			<section className="flex flex-col items-center">
