@@ -1,8 +1,9 @@
+import { Sidebar } from '@/components/Sidebar'
 import { cn } from '@/lib/utils'
 
 import './globals.css'
 
-import { Sidebar } from '@/components/Sidebar'
+import { ReleasesNotesProvider } from '@/components/providers/release-note-provider'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 		<html lang="pt-BR">
 			<body className={cn('antialiased', inter.className)}>
 				<Sidebar />
+				<ReleasesNotesProvider />
 				{children}
 			</body>
 		</html>
