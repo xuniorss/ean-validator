@@ -1,10 +1,10 @@
 'use client'
 
+import { EansArray } from '@/components/EansArray'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { EansProps } from '@/types'
 import { eanValidator } from '@/utils/ean-validate'
-
 import { ChangeEvent, useCallback, useState } from 'react'
 
 export default function ValidatorPage() {
@@ -73,15 +73,7 @@ export default function ValidatorPage() {
 						{validEANs.length > 0 && (
 							<div className="flex h-full flex-col">
 								<h3>EANs Válidos: {validEANs.length}</h3>
-								<ul>
-									{validEANs.map((ean, idx) => (
-										<li key={idx}>
-											<strong>COD_PRODUTO:</strong> {ean.codProduto}
-											{'; '}
-											<strong>COD_EAN:</strong> {ean.ean}
-										</li>
-									))}
-								</ul>
+								<EansArray data={validEANs} />
 							</div>
 						)}
 					</div>
@@ -90,15 +82,7 @@ export default function ValidatorPage() {
 						{invalidEANs.length > 0 && (
 							<div className="flex h-full flex-col">
 								<h3>EANs Inválidos: {invalidEANs.length}</h3>
-								<ul>
-									{invalidEANs.map((ean, idx) => (
-										<li key={idx}>
-											<strong>COD_PRODUTO:</strong> {ean.codProduto}
-											{'; '}
-											<strong>COD_EAN:</strong> {ean.ean}
-										</li>
-									))}
-								</ul>
+								<EansArray data={invalidEANs} />
 							</div>
 						)}
 					</div>
