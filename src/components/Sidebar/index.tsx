@@ -1,5 +1,6 @@
 'use client'
 
+import { SYSTEM_VERSION } from '@/constants'
 import { cn } from '@/lib/utils'
 import { Binary, FileSearch, LucideIcon } from 'lucide-react'
 import Link from 'next/link'
@@ -23,11 +24,16 @@ export const Sidebar = () => {
 
 	return (
 		<aside className="fixed inset-y-0 hidden h-full w-72 border-r py-5 lg:flex lg:flex-col lg:items-center">
-			<section className="flex-1 space-y-10">
-				<Link href="/" className="flex items-center">
-					<Binary className="h-7 w-7" />
-					<h1 className="text-lg font-bold">Validador de Eans</h1>
-				</Link>
+			<section className="flex-1 space-y-8">
+				<div>
+					<Link href="/" className="flex items-center">
+						<Binary className="h-7 w-7" />
+						<h1 className="text-lg font-bold">Validador de Eans</h1>
+					</Link>
+					<h2 className="text-center text-sm text-muted-foreground">
+						{SYSTEM_VERSION} (beta)
+					</h2>
+				</div>
 
 				<ul className="w-full space-y-3">
 					{sidebarRoutes.map((route) => (

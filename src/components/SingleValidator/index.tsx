@@ -25,7 +25,8 @@ export const SingleValidator = () => {
 				<DialogHeader>
 					<DialogTitle>Validação única</DialogTitle>
 					<DialogDescription>
-						Copie e cole aqui um ean por vez e veja se está válido ou não.
+						Digite ou copie e cole um ean por vez e veja se está válido ou
+						não.
 					</DialogDescription>
 				</DialogHeader>
 				<div className="w-full">
