@@ -27,8 +27,8 @@ export const ReleasesNotes = () => {
 				<article className="my-2">
 					<section className="flex flex-col space-y-1">
 						<ListRelease
-							title="Ajuste na verificação do cabeçalho."
-							description="Foi aprimorada a verificação do cabeçalho do arquivo."
+							title="Melhoria de visualização."
+							description="No validador único, para mais clareza foi colocado um retorno visual no campo de digitação."
 						/>
 					</section>
 				</article>

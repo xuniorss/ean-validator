@@ -21,6 +21,12 @@ export const SValidator = () => {
 				minLength={2}
 				maxLength={13}
 				placeholder="Ex: 7896003706543"
+				className={cn(
+					status
+						? 'focus-visible:outline-emerald-500'
+						: 'focus-visible:outline-red-500',
+					input.length <= 1 && 'focus-visible:outline-black',
+				)}
 				onChange={(e) => setInput(e.target.value)}
 			/>
 			{input.length > 1 && (
