@@ -27,9 +27,8 @@ export const ReleasesNotes = () => {
 				<article className="my-2">
 					<section className="flex flex-col space-y-1">
 						<ListRelease
-							title="Melhoria no desempenho da listagem"
-							description="Implementado infinite scroll na listagem de ambos
-									eans"
+							title="Ajuste na verificação do cabeçalho."
+							description="Foi aprimorada a verificação do cabeçalho do arquivo."
 						/>
 					</section>
 				</article>

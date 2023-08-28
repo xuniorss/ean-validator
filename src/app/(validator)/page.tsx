@@ -39,7 +39,11 @@ export default function ValidatorPage() {
 			const invalidEANsArray: EansProps[] = []
 
 			for (const line of lines) {
-				if (line.toLowerCase().includes('cod_produto cod_ean')) continue
+				if (
+					line.trim().startsWith('COD_PRODUTO') &&
+					line.trim().endsWith('COD_EAN')
+				)
+					continue
 
 				const [codProduto, ean] = line.trim().split(/\s+/)
 				if (eanValidator(ean)) validEANsArray.push({ codProduto, ean })
