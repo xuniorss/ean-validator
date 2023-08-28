@@ -2,7 +2,7 @@
 
 import { SYSTEM_VERSION } from '@/constants'
 import { cn } from '@/lib/utils'
-import { Binary, FileSearch, LucideIcon } from 'lucide-react'
+import { Binary, FileCheck, LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { HowItWorks } from '../HowItWorks'
@@ -16,7 +16,7 @@ type RoutesProps = {
 }
 
 const sidebarRoutes: RoutesProps[] = [
-	{ label: 'Validador', href: '/', icon: FileSearch },
+	{ label: 'Validar txt', href: '/', icon: FileCheck },
 ]
 
 export const Sidebar = () => {
@@ -49,7 +49,15 @@ export const Sidebar = () => {
 								className="flex items-center gap-x-2"
 							>
 								<route.icon className="h-5 w-5" />
-								<p>{route.label}</p>
+								<p
+									className={cn(
+										route.href === pathname
+											? 'font-semibold'
+											: 'font-normal',
+									)}
+								>
+									{route.label}
+								</p>
 							</Link>
 						</li>
 					))}
