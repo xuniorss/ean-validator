@@ -36,9 +36,9 @@ yarn
 
 ```shell
 npm run dev
-# or
+# ou
 yarn dev
-# or
+# ou
 pnpm dev
 ```
 
